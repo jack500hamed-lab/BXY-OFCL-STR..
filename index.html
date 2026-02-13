@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BXY / OFFICIAL STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root { --main-color: #00f2ff; --bg-dark: #050505; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: 'Syne', sans-serif; margin: 0; text-align: center; }
+        header { padding: 40px; border-bottom: 1px solid #1a1a1a; }
+        h1 { font-size: 3.5rem; letter-spacing: -2px; text-transform: uppercase; margin: 0; }
+        h1 span { color: var(--main-color); text-shadow: 0 0 15px var(--main-color); }
+        
+        /* شريط العروض */
+        .promo-bar { background: var(--main-color); color: #000; padding: 10px; font-weight: bold; font-size: 0.8rem; }
+
+        /* عجلة الحظ */
+        .wheel-container { margin: 30px auto; width: 220px; height: 220px; border: 4px solid var(--main-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 4s cubic-bezier(0.1, 0, 0, 1); background: #0a0a0a; font-size: 0.8rem; text-shadow: 0 0 5px var(--main-color); }
+        .spin-btn { background: var(--main-color); color: #000; border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; border-radius: 5px; margin-top: 10px; text-transform: uppercase; }
+
+        /* التصويت الأسبوعي */
+        .vote-section { background: #0a0a0a; margin: 30px auto; padding: 20px; width: 85%; border-radius: 15px; border: 1px solid #1a1a1a; }
+        .vote-option { background: #111; padding: 15px; margin: 10px 0; border: 1px solid #333; cursor: pointer; border-radius: 8px; transition: 0.3s; }
+        .vote-option:hover { border-color: var(--main-color); }
+
+        /* بوت الشات */
+        #chat-bot { position: fixed; bottom: 20px; left: 20px; width: 280px; background: #111; border: 1px solid var(--main-color); border-radius: 15px; display: none; flex-direction: column; text-align: right; z-index: 1000; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #chat-header { background: var(--main-color); color: #000; padding: 12px; border-radius: 12px 12px 0 0; font-weight: bold; cursor: pointer; }
+        #chat-body { height: 200px; overflow-y: auto; padding: 15px; font-size: 0.85rem; line-height: 1.5; }
+        #chat-input { border: none; padding: 12px; background: #222; color: #fff; border-radius: 0 0 12px 12px; outline: none; }
+
+        .bot-launcher { position: fixed; bottom: 20px; left: 20px; background: var(--main-color); color: #000; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; border: none; box-shadow: 0 0 15px var(--main-color); font-size: 0.7rem; z-index: 999; }
+
+        /* المنتج والتعليقات */
+        .product-card { margin: 30px auto; width: 85%; max-width: 400px; background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; border-radius: 15px; }
+        .comment-area { margin: 30px auto; width: 85%; text-align: right; }
+        .comment-input { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
+        
+        footer { padding: 40px; color: #333; font-size: 0.7rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="promo-bar">BXY OFFICIAL STORE - NEW DROP COMING SOON</div>
+
+    <header>
+        <h1>B<span>X</span>Y</h1>
+        <p style="letter-spacing: 5px; color: #444; font-size: 0.7rem; margin-top: 10px;">AUTHORIZED ACCESS ONLY</p>
+    </header>
+
+    <section style="margin-top: 40px;">
+        <div class="wheel-container" id="wheel">BXY SPIN</div>
+        <button class="spin-btn" onclick="spinWheel()">العب واكسب خصم</button>
+        <p id="couponResult" style="color: var(--main-color); font-weight: bold; margin-top: 15px;"></p>
+    </section>
+
+    <div class="vote-section">
+        <h3 style="color: var(--main-color);">التصويت الأسبوعي ⚡</h3>
+        <p style="font-size: 0.8rem; color: #666;">اختار التصميم اللي عايزه ينزل الـ Drop الجاي</p>
+        <div class="vote-option" onclick="alert('شكراً لتصويتك لـ Thunder Hoodie')">1. Thunder Hoodie (Oversized)</div>
+        <div class="vote-option" onclick="alert('شكراً لتصويتك لـ BXY T-shirt')">2. BXY Signature T-shirt</div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://via.placeholder.com/300x380/000000/00f2ff?text=BXY+PREMIUM" style="width:100%; border-radius:10px;">
+        <h3 style="margin: 15px 0 5px 0;">THUNDER HOODIE V.1</h3>
+        <p style="color: #666; font-size: 0.9rem;">السعر: 550 ج.م</p>
+        <a href="https://wa.me/2010XXXXXXXX" style="display: block; background: var(--main-color); color: #000; text-decoration: none; padding: 15px; margin-top: 15px; font-weight: bold; border-radius: 8px;">اطلب عبر واتساب</a>
+    </div>
+
+    <div class="comment-area">
+        <h4>التعليقات</h4>
+        <textarea class="comment-input" id="cInput" rows="2" placeholder="اكتب رأيك هنا..."></textarea>
+        <button onclick="addC()" style="background: #fff; color: #000; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">نشر</button>
+        <div id="cList" style="margin-top: 20px;"></div>
+    </div>
+
+    <button class="bot-launcher" onclick="toggleChat()">BXY<br>BOT</button>
+    <div id="chat-bot">
+        <div id="chat-header" onclick="toggleChat()">BXY ASSISTANT</div>
+        <div id="chat-body" id="chatBody">
+            <p style="color:var(--main-color)">بوت BXY: أهلاً بك في ستور BXY. أنا هنا لمساعدتك بخصوص الخامات أو المقاسات. اسألني أي حاجة!</p>
+        </div>
+        <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." onkeypress="handleChat(event)">
+    </div>
+
+    <footer>&copy; 2026 BXY STORE. ALL RIGHTS RESERVED.</footer>
+
+    <script>
+        // 1. إعدادات الخصومات (عدلهم من هنا)
+        const prizes = ["خصم 10% كود: BXY10", "خصم 20% كود: WIN20", "شحن مجاني كود: FREE", "حظ أوفر المرة القادمة"];
+        
+        function spinWheel() {
+            const wheel = document.getElementById('wheel');
+            const randomDeg = Math.floor(Math.random() * 3600) + 720;
+            wheel.style.transform = `rotate(${randomDeg}deg)`;
+            
+            setTimeout(() => {
+                const prize = prizes[Math.floor(Math.random() * prizes.length)];
+                document.getElementById('couponResult').innerHTML = prize;
+            }, 4000);
+        }
+
+        // 2. البوت الذكي
+        function toggleChat() {
+            const chat = document.getElementById('chat-bot');
+            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function handleChat(e) {
+            if(e.key === 'Enter') {
+                const input = document.getElementById('chat-input');
+                const body = document.getElementById('chat-body');
+                const val = input.value;
+                
+                body.innerHTML += `<p style="color:#888">أنت: ${val}</p>`;
+                
+                let reply = "سوف يتم الرد في أقرب وقت، شكراً لانتظاركم. ⚡";
+                
+                if(val.includes("خامة") || val.includes("قماش") || val.includes("تفاصيل")) {
+                    reply = "خامات BXY قطن 100% ميلتون ثقيل، معالجة ضد الانكماش، وطباعة DTF عالية الجودة لا تتأثر بالغسيل.";
+                } else if(val.includes("مقاس") || val.includes("سايز")) {
+                    reply = "مقاساتنا Oversized (مريحة وواسعة). تقدر تطلب جدول المقاسات عبر الواتساب للتأكد.";
+                }
+
+                setTimeout(() => {
+                    body.innerHTML += `<p style="color:var(--main-color)">BXY: ${reply}</p>`;
+                    body.scrollTop = body.scrollHeight;
+                }, 600);
+                input.value = "";
+            }
+        }
+
+        // 3. إضافة كومنت
+        function addC() {
+            const input = document.getElementById('cInput');
+            if(input.value) {
+                const div = document.createElement('div');
+                div.style = "background:#111; padding:10px; border-bottom:1px solid #222; margin-bottom:5px; font-size:0.8rem;";
+                div.innerText = input.value;
+                document.getElementById('cList').prepend(div);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
