@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">ز
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BXY | Official Store</title>
+    <title>BXY | Global Store</title>
     <style>
         :root { --main-bg: #ffffff; --text-color: #000000; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--main-bg); color: var(--text-color); margin: 0; padding: 0; }
@@ -15,19 +15,34 @@
         .container { padding: 20px; text-align: center; }
         .product-card { border: 1px solid #f0f0f0; border-radius: 10px; padding: 15px; margin: 20px auto; max-width: 300px; }
         .product-img { width: 100%; border-radius: 8px; background: #f9f9f9; min-height: 200px; display: flex; align-items: center; justify-content: center; }
-        .wheel-btn { position: fixed; bottom: 20px; right: 20px; font-size: 35px; background: #fff; border: 1px solid #eee; border-radius: 50%; width: 65px; height: 65px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        #bot-box { position: fixed; bottom: 95px; left: 20px; width: 260px; background: #000; color: #fff; border-radius: 15px; padding: 15px; display: none; font-size: 14px; text-align: right; line-height: 1.6; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        /* مكان المترجم */
+        #google_translate_element { display: none; padding: 10px; background: #f9f9f9; border-bottom: 1px solid #ddd; text-align: center; }
+        
+        .chat-btn { position: fixed; bottom: 20px; left: 20px; font-size: 30px; background: #000; color: #fff; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .wheel-btn { position: fixed; bottom: 20px; right: 20px; font-size: 35px; background: #fff; border: 1px solid #eee; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        
+        #chat-window { position: fixed; bottom: 90px; left: 20px; width: 280px; background: #fff; border: 2px solid #000; border-radius: 15px; display: none; flex-direction: column; z-index: 1001; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        #chat-header { background: #000; color: #fff; padding: 10px; font-weight: bold; text-align: center; }
+        #chat-body { height: 200px; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .msg { padding: 8px; border-radius: 8px; font-size: 13px; max-width: 85%; }
+        .bot-msg { background: #f0f0f0; align-self: flex-start; }
+        .user-msg { background: #000; color: #fff; align-self: flex-end; }
     </style>
 </head>
 <body>
+
+<div id="google_translate_element"></div>
+
 <header>
     <div class="nav-icons">
-        <div class="menu-icon" onclick="alert('اللغات قيد الإضافة!')">☰</div>
+        <div class="menu-icon" onclick="showTranslator()">☰</div>
         <label class="admin-upload">⬆️<input type="file" hidden onchange="previewImage(event)"></label>
     </div>
     <input type="text" class="search-bar" placeholder="بحث...">
     <div style="font-weight: bold; font-size: 22px;">BXY</div>
 </header>
+
 <div class="container">
     <div class="product-card">
         <div class="product-img" id="display-img">صورة التصميم</div>
@@ -35,28 +50,63 @@
         <button style="background:#000; color:#fff; border:none; padding:10px 25px; border-radius:5px; cursor:pointer;">طلب الآن</button>
     </div>
 </div>
+
 <div class="wheel-btn" onclick="spinWheel()">🎰</div>
-<div id="bot-box" onclick="this.style.display='none'"><strong id="bot-name">بيكسي ✨</strong><p id="bot-msg"></p></div>
+<div class="chat-btn" onclick="toggleChat()">💬</div>
+
+<div id="chat-window">
+    <div id="chat-header">بيكسي | BXY ✨</div>
+    <div id="chat-body"><div class="msg bot-msg">أهلاً يا وحش! أنا بيكسي، مترجم لكل اللغات وملك الشياكة!</div></div>
+    <div style="display:flex; padding:5px; border-top:1px solid #eee;">
+        <input type="text" id="chat-input" style="flex:1; border:none; outline:none;" placeholder="اكتب لبيكسي...">
+        <button onclick="sendMessage()" style="background:#000; color:#fff; border:none; padding:5px;">إرسال</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'ar'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
+    function showTranslator() {
+        const trans = document.getElementById('google_translate_element');
+        trans.style.display = trans.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleChat() {
+        const win = document.getElementById('chat-window');
+        win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chat-input');
+        if (!input.value) return;
+        addMsg(input.value, 'user-msg');
+        setTimeout(() => addMsg("بيكسي بيقولك: ذوقك ملوش لغة، عالمي في كل حتة!", 'bot-msg'), 1000);
+        input.value = '';
+    }
+
+    function addMsg(text, type) {
+        const body = document.getElementById('chat-body');
+        const d = document.createElement('div');
+        d.className = 'msg ' + type; d.innerText = text;
+        body.appendChild(d); body.scrollTop = body.scrollHeight;
+    }
+
+    function spinWheel() {
+        alert("Lucky Day! You got 15% Discount!");
+    }
+
     function previewImage(event) {
         const reader = new FileReader();
         reader.onload = () => {
             document.getElementById('display-img').innerHTML = `<img src="${reader.result}" style="width:100%; border-radius:8px;">`;
-            botSpeak("عاش يا وحش! التصميم ده هيقلب الدنيا!");
         };
         reader.readAsDataURL(event.target.files[0]);
     }
-    function spinWheel() {
-        const prizes = ["خصم 15%", "شحن مجاني", "قطعة هدية"];
-        botSpeak("مبروووك! الـ 777 كسبتك " + prizes[Math.floor(Math.random()*prizes.length)]);
-    }
-    function botSpeak(t) {
-        const box = document.getElementById('bot-box');
-        document.getElementById('bot-msg').innerText = t;
-        box.style.display = 'block';
-    }
-    setTimeout(() => botSpeak("أهلاً بيك في عالم BXY.. جاهز تكسر الدنيا؟"), 2000);
 </script>
 </body>
-    </html>
-    
+</html>
