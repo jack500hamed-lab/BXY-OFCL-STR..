@@ -2,65 +2,114 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Bexy Store | الهوديز الأصلية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bexy Store | الموقع الرسمي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #121212; color: white; margin: 0; }
-        
-        /* الهيدر والأيقونات */
-        header { display: flex; justify-content: space-between; padding: 20px 50px; background: #1a1a1a; border-bottom: 2px solid #ff4500; }
-        .logo { font-size: 28px; font-weight: bold; color: #ff4500; }
-        
-        nav ul { list-style: none; display: flex; padding: 0; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { color: white; text-decoration: none; font-size: 18px; transition: 0.3s; }
-        nav ul li a i { margin-left: 8px; color: #ff4500; } /* تنسيق الأيقونة */
-        nav ul li a:hover { color: #ff4500; }
+        :root { --main-orange: #ff4500; --dark-bg: #1a1a1b; --text-gray: #888; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f9f9f9; color: #333; }
 
-        /* الشات بوت اللي في الجنب */
-        .chat-icon {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #ff4500;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        /* الهيدر العلوي (الأسود) */
+        .top-bar { background: #111; color: white; padding: 10px 50px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .top-nav a { color: #ccc; text-decoration: none; margin-left: 20px; }
+
+        /* الهيدر الأساسي (الأبيض) */
+        header { background: white; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); sticky: top; }
+        .logo { font-size: 30px; font-weight: 900; color: #111; display: flex; align-items: center; }
+        .logo span { color: var(--main-orange); margin-left: 5px; }
+        .main-nav a { color: #333; text-decoration: none; font-weight: 600; margin-right: 25px; font-size: 16px; }
+        .sobry-btn { background: #333; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; }
+
+        /* سيكشن الهيرو (الأسود اللي فيه التيشرت الكبير) */
+        .hero { background: #1a1a1b; color: white; padding: 60px 50px; display: flex; align-items: center; justify-content: space-around; position: relative; }
+        .hero-content { max-width: 400px; }
+        .hero h1 { font-size: 35px; line-height: 1.2; }
+        .hero p { color: var(--text-gray); margin-bottom: 30px; }
+        .hero .btn-shop { background: #444; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; }
+        .hero-img img { width: 350px; filter: drop-shadow(0 0 20px rgba(0,150,255,0.3)); }
+
+        /* قسم المنتجات (Mentions) */
+        .section-title { padding: 40px 50px 10px; font-size: 24px; font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px 50px; }
+        .product-card { background: white; border-radius: 10px; padding: 15px; text-align: left; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { width: 100%; border-radius: 8px; background: #f0f0f0; }
+        .product-card h3 { font-size: 16px; margin: 15px 0 5px; color: #222; }
+        .product-card p { color: var(--text-gray); font-size: 14px; }
+
+        /* أيقونة الشات */
+        .chat-bubble { position: fixed; bottom: 30px; right: 30px; background: white; padding: 15px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .chat-bubble i { font-size: 20px; margin-left: 10px; color: #666; }
+
+        /* الموبايل */
+        @media (max-width: 768px) {
+            header, .hero, .top-bar { padding: 15px; flex-direction: column; text-align: center; }
+            .hero-img img { width: 250px; margin-top: 30px; }
+            .main-nav { margin: 20px 0; }
         }
-
-        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x600'); background-size: cover; }
-        .btn { background: #ff4500; border: none; padding: 15px 40px; color: white; font-size: 20px; border-radius: 50px; cursor: pointer; }
     </style>
 </head>
 <body>
 
+    <div class="top-bar">
+        <div class="logo">BXY<span>F</span></div>
+        <div class="top-nav">
+            <a href="#">Honpirit</a>
+            <a href="#">Hoolls</a>
+            <a href="#">Cerchimt</a>
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
     <header>
-        <div class="logo">BEXY</div>
-        <nav>
-            <ul>
-                <li><a href="#"><i class="fas fa-home"></i>الرئيسية</a></li>
-                <li><a href="#"><i class="fas fa-tshirt"></i>الموديلات</a></li>
-                <li><a href="#"><i class="fas fa-shopping-cart"></i>السلة</a></li>
-                <li><a href="#"><i class="fas fa-phone-alt"></i>تواصل معنا</a></li>
-            </ul>
+        <div class="logo">BXY<span>F</span></div>
+        <nav class="main-nav">
+            <a href="#">Houes</a>
+            <a href="#">Mentats</a>
+            <a href="#">Anouts</a>
+            <a href="#">Shmp</a>
         </nav>
+        <a href="#" class="sobry-btn">Sobry</a>
     </header>
 
     <section class="hero">
-        <h1>هوديز <span style="color: #ff4500;">BEXY</span> وصلت! 🔥</h1>
-        <p>مش مجرد لبس، دي شخصيتك.</p>
-        <button class="btn">اشوف الكوليكشن</button>
+        <div class="hero-img">
+            <img src="https://via.placeholder.com/400x400/1a1a1b/ffffff?text=BEXY+HOODIE" alt="Main Hoodie">
+        </div>
+        <div class="hero-content">
+            <h1>Ouit wigred Mchein Bagod snids</h1>
+            <p>Founia your connemi io aih jour</p>
+            <button class="btn-shop">Sckliy</button>
+        </div>
     </section>
 
-    <div class="chat-icon">
-        <i class="fas fa-comments"></i>
+    <div class="section-title">Menutionts</div>
+    
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+1" alt="H1">
+            <h3>Fat Famte</h3>
+        </div>
+        <div class="product-card">
+            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+2" alt="H2">
+            <h3>Recklate</h3>
+        </div>
+        <div class="product-card">
+            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+3" alt="H3">
+            <h3>Par Ackron</h3>
+        </div>
+        <div class="product-card">
+            <img src="https://via.placeholder.com/200x200/333/fff?text=Hoodie+4" alt="H4">
+            <h3>Ounct Fion</h3>
+        </div>
+    </div>
+
+    <div class="chat-bubble">
+        <i class="fas fa-comment-dots"></i>
+        <i class="fas fa-cog"></i>
+        <img src="https://via.placeholder.com/30" style="border-radius: 50%; margin-right: 10px;">
     </div>
 
 </body>
-</html>
+                </html>
+                
