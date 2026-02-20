@@ -6,110 +6,85 @@
     <title>Bexy Store | الموقع الرسمي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-orange: #ff4500; --dark-bg: #1a1a1b; --text-gray: #888; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f9f9f9; color: #333; }
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; margin: 0; background: #f4f4f4; color: #333; line-height: 1.6; }
 
-        /* الهيدر العلوي (الأسود) */
-        .top-bar { background: #111; color: white; padding: 10px 50px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-        .top-nav a { color: #ccc; text-decoration: none; margin-left: 20px; }
+        /* الهيدر الأسود الصغير */
+        .top-nav { background: #1a1a1b; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .top-links a { color: #ccc; text-decoration: none; margin-right: 15px; }
 
-        /* الهيدر الأساسي (الأبيض) */
-        header { background: white; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); sticky: top; }
-        .logo { font-size: 30px; font-weight: 900; color: #111; display: flex; align-items: center; }
-        .logo span { color: var(--main-orange); margin-left: 5px; }
-        .main-nav a { color: #333; text-decoration: none; font-weight: 600; margin-right: 25px; font-size: 16px; }
-        .sobry-btn { background: #333; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; }
+        /* الهيدر الأبيض الأساسي */
+        header { background: white; padding: 15px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: 900; }
+        .logo span { color: #ff4500; }
+        
+        .main-menu { display: flex; gap: 15px; }
+        .main-menu a { text-decoration: none; color: #333; font-weight: 600; font-size: 14px; }
+        .sobry-btn { background: #1a1a1b; color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; }
 
-        /* سيكشن الهيرو (الأسود اللي فيه التيشرت الكبير) */
-        .hero { background: #1a1a1b; color: white; padding: 60px 50px; display: flex; align-items: center; justify-content: space-around; position: relative; }
-        .hero-content { max-width: 400px; }
-        .hero h1 { font-size: 35px; line-height: 1.2; }
-        .hero p { color: var(--text-gray); margin-bottom: 30px; }
-        .hero .btn-shop { background: #444; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; }
-        .hero-img img { width: 350px; filter: drop-shadow(0 0 20px rgba(0,150,255,0.3)); }
+        /* سيكشن البطولات (الأسود) - معدل للموبايل */
+        .hero { background: #1a1a1b; color: white; padding: 40px 20px; text-align: center; }
+        .hero img { width: 100%; max-width: 300px; height: auto; margin-bottom: 20px; }
+        .hero h1 { font-size: 24px; margin: 10px 0; }
+        .hero p { color: #888; font-size: 14px; }
+        .sckliy-btn { background: #333; color: white; border: none; padding: 10px 30px; border-radius: 5px; cursor: pointer; margin-top: 15px; }
 
-        /* قسم المنتجات (Mentions) */
-        .section-title { padding: 40px 50px 10px; font-size: 24px; font-weight: bold; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px 50px; }
-        .product-card { background: white; border-radius: 10px; padding: 15px; text-align: left; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
-        .product-card:hover { transform: translateY(-5px); }
-        .product-card img { width: 100%; border-radius: 8px; background: #f0f0f0; }
-        .product-card h3 { font-size: 16px; margin: 15px 0 5px; color: #222; }
-        .product-card p { color: var(--text-gray); font-size: 14px; }
+        /* شبكة المنتجات */
+        .section-title { padding: 20px; font-size: 20px; font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 0 20px 40px; }
+        .card { background: white; padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .card img { width: 100%; border-radius: 5px; background: #eee; }
+        .card h3 { font-size: 14px; margin-top: 10px; }
 
-        /* أيقونة الشات */
-        .chat-bubble { position: fixed; bottom: 30px; right: 30px; background: white; padding: 15px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
-        .chat-bubble i { font-size: 20px; margin-left: 10px; color: #666; }
+        /* زر الشات العائم */
+        .floating-chat { position: fixed; bottom: 20px; left: 20px; background: white; padding: 10px 15px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; gap: 10px; align-items: center; }
 
-        /* الموبايل */
-        @media (max-width: 768px) {
-            header, .hero, .top-bar { padding: 15px; flex-direction: column; text-align: center; }
-            .hero-img img { width: 250px; margin-top: 30px; }
-            .main-nav { margin: 20px 0; }
+        /* تعديلات الموبايل الإضافية */
+        @media (max-width: 600px) {
+            header { justify-content: center; gap: 15px; }
+            .main-menu { order: 3; width: 100%; justify-content: center; margin-top: 10px; }
+            .top-nav { flex-direction: column; gap: 5px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
+    <div class="top-nav">
         <div class="logo">BXY<span>F</span></div>
-        <div class="top-nav">
-            <a href="#">Honpirit</a>
-            <a href="#">Hoolls</a>
-            <a href="#">Cerchimt</a>
-            <i class="fas fa-search"></i>
+        <div class="top-links">
+            <a href="#">Honpirit</a> <a href="#">Hoolls</a> <a href="#">Cerchimt</a> <i class="fas fa-search"></i>
         </div>
     </div>
 
     <header>
         <div class="logo">BXY<span>F</span></div>
-        <nav class="main-nav">
-            <a href="#">Houes</a>
-            <a href="#">Mentats</a>
-            <a href="#">Anouts</a>
-            <a href="#">Shmp</a>
-        </nav>
+        <div class="main-menu">
+            <a href="#">Houes</a> <a href="#">Mentats</a> <a href="#">Anouts</a> <a href="#">Shmp</a>
+        </div>
         <a href="#" class="sobry-btn">Sobry</a>
     </header>
 
     <section class="hero">
-        <div class="hero-img">
-            <img src="https://via.placeholder.com/400x400/1a1a1b/ffffff?text=BEXY+HOODIE" alt="Main Hoodie">
-        </div>
-        <div class="hero-content">
-            <h1>Ouit wigred Mchein Bagod snids</h1>
-            <p>Founia your connemi io aih jour</p>
-            <button class="btn-shop">Sckliy</button>
-        </div>
+        <img src="https://via.placeholder.com/300x300/1a1a1b/ffffff?text=BEXY+HOODIE" alt="Main Hoodie">
+        <h1>Ouit wigred Mchein Bagod snids</h1>
+        <p>Founia your connemi io aih jour</p>
+        <button class="sckliy-btn">Sckliy</button>
     </section>
 
     <div class="section-title">Menutionts</div>
     
     <div class="product-grid">
-        <div class="product-card">
-            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+1" alt="H1">
-            <h3>Fat Famte</h3>
-        </div>
-        <div class="product-card">
-            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+2" alt="H2">
-            <h3>Recklate</h3>
-        </div>
-        <div class="product-card">
-            <img src="https://via.placeholder.com/200x200/eee/333?text=Hoodie+3" alt="H3">
-            <h3>Par Ackron</h3>
-        </div>
-        <div class="product-card">
-            <img src="https://via.placeholder.com/200x200/333/fff?text=Hoodie+4" alt="H4">
-            <h3>Ounct Fion</h3>
-        </div>
+        <div class="card"><img src="https://via.placeholder.com/150?text=H1"><h3>Fat Famte</h3></div>
+        <div class="card"><img src="https://via.placeholder.com/150?text=H2"><h3>Recklate</h3></div>
+        <div class="card"><img src="https://via.placeholder.com/150?text=H3"><h3>Par Ackron</h3></div>
+        <div class="card"><img src="https://via.placeholder.com/150?text=H4"><h3>Ounct Fion</h3></div>
     </div>
 
-    <div class="chat-bubble">
+    <div class="floating-chat">
         <i class="fas fa-comment-dots"></i>
         <i class="fas fa-cog"></i>
-        <img src="https://via.placeholder.com/30" style="border-radius: 50%; margin-right: 10px;">
+        <div style="width: 25px; height: 25px; background: #ddd; border-radius: 50%;"></div>
     </div>
 
 </body>
-                </html>
-                
+</html>
